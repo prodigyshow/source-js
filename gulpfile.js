@@ -5,14 +5,14 @@ const webpack = require("webpack-stream");
 const browsersync = require("browser-sync");
 
 const dist = "./dist/";
-
+ 
 gulp.task("copy-html", () => {
     return gulp.src("./src/index.html")
                 .pipe(gulp.dest(dist))
                 .pipe(browsersync.stream());
 });
 
-gulp.task("build-js", () => {
+gulp.task("build-js", () => { 
     return gulp.src("./src/js/main.js")
                 .pipe(webpack({
                     mode: 'development',
