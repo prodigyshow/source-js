@@ -17,7 +17,9 @@ const forms = (state) => {
 
     // Функция отправки запроса
     const postData = async (url, data) => {                                     // с помощью есинк джс узнает о ассинхронной операции
-        document.querySelector('.status').textContent = message.loading;        // находим наш блок и добавляем сообщение 
+        document.querySelector('.status').textContent = message.loading;
+        
+        // находим наш блок и добавляем сообщение 
         // ассинхроная операция отправки
         let res = await fetch(url, {                                            // с помощью евейт джс ждет окончания отправки запроса и получаем результат в res
             method: 'POST',
