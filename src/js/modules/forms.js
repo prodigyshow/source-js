@@ -1,17 +1,12 @@
-const forms = () => {
+import checkNumInputs from './checkNumInputs';
+
+const forms = (state) => {
     
     // Получаем все формы и инпуты
     const form = document.querySelectorAll('form'),             
-          inputs = document.querySelectorAll('input'),
-          phoneInputs = document.querySelectorAll('input[name="user_phone"]'); 
+          inputs = document.querySelectorAll('input');
 
-    // Валидация
-    phoneInputs.forEach(item => {
-        item.addEventListener('input', () => {
-            
-            item.value = item.value.replace(/\D/, '');      // если находит не число заменяет пустой строкой
-        });
-    });
+    checkNumInputs('input[name="user_phone"]');
 
     // Объект для вывода сообщения о процессе
     const message = {
@@ -51,6 +46,12 @@ const forms = () => {
             item.appendChild(statusMessage);                        // Помещаем блок на страницу в конец формы
 
             const formData = new FormData(item);                    // Собираем все данные в форме с помощью FormData()
+
+            if (item.getAttribute('data-calc') === "end") {         // Ищем форму с калькулятором
+                for (let key in state) {                            
+                    formData.append(key, state[key]);                 // данные перебираем и добавляем в FormData
+                }
+            }
 
             // Цепочка операции отправки
             postData('assets/server.php', formData)
